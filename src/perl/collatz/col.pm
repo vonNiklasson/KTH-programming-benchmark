@@ -3,7 +3,9 @@
 sub main
 {
     my $f = 0;
-    for (my $i = 1; $i < 1000000; $i++)
+    my $i;
+
+    for ($i = 1; $i < 500000; $i++)
     {
         $f = $f + collatz($i);
     }
@@ -17,6 +19,7 @@ sub collatz
 {
     my $n = shift;
     $c = 0;
+
     while ($n != 1)
     {
         if ($n % 2 == 0)
@@ -29,7 +32,7 @@ sub collatz
         }
         $c = $c + 1;
     }
-    return $c;;
+    return $c;
 }
 
 &main;
