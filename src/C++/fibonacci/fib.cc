@@ -12,6 +12,7 @@ int main()
     {
         f = fibonacci(45);
     }
+    
     cout << f << endl;
 
     return 0;

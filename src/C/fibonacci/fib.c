@@ -12,6 +12,7 @@ int main()
     {
         f = fibonacci(45);
     }
+    
     printf("%d\n", f);
 
     return 0;
