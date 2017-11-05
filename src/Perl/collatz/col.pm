@@ -4,10 +4,14 @@ sub main
 {
     my $f = 0;
     my $i;
+    my $j;
 
-    for ($i = 1; $i < 500000; $i++)
+    for ($j = 1; $j < 100; $j++)
     {
-        $f = $f + collatz($i);
+        for ($i = 1; $i < 113382; $i++)
+        {
+            $f = $f + collatz($i);
+        }
     }
 
     printf "%d\n", $f;

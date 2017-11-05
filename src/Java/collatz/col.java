@@ -4,10 +4,14 @@ public class col
     {
         int f = 0;
         int i;
+        int j;
 
-        for (i = 1; i < 100000; i++)
+        for (j = 0; j < 100; j++)
         {
-            f = f + collatz(i);
+            for (i = 1; i < 113382; i++)
+            {
+                f = f + collatz(i);
+            }
         }
 
         System.out.println(f);
