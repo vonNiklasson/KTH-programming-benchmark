@@ -3,11 +3,13 @@
 sub main
 {
     my $f;
-    for (my $i=0; $i < 1; $i++)
+    my $f2;
+    for (my $i=0; $i < 1000000; $i++)
     {
-        $f = fibonacci(45);
+        $f2 = fibonacci2(46);
     }
     printf "%d\n", $f;
+    printf "%d\n", $f2;
 
     exit 0;
 }
@@ -29,3 +31,17 @@ sub fibonacci
 }
 
 &main;
+
+sub fibonacci2
+{
+    my $n = shift;
+    my $n1 = 1;
+    my $n2 = 1;
+    my $n3 = 0;
+    for (my $i = 2; $i < $n; $i++) {
+        $n3 = $n1 + $n2;
+        $n1 = $n2;
+        $n2 = $n3;
+    }
+    return $n3;
+}

@@ -1,29 +1,35 @@
 #!/usr/bin/perl
 
-sub main {
-    my $f = collatz(123201);
+sub main
+{
+    my $f = 0;
+    for (my $i = 1; $i < 1000000; $i++)
+    {
+        $f = $f + collatz($i);
+    }
+
     printf "%d\n", $f;
 
     exit 0;
 }
 
-# Except for the first line declaring the subroutine, and the different way that
-# parameters passed to the subroutine are passed, this is identical to the PHP version
-
-sub collatz {
+sub collatz
+{
     my $n = shift;
-    if ($n == 0)
+    $c = 0;
+    while ($n != 1)
     {
-        return 0;
+        if ($n % 2 == 0)
+        {
+            $n = $n / 2;
+        }
+        else
+        {
+            $n = $n * 3 + 1;
+        }
+        $c = $c + 1;
     }
-    elsif ($n % 2 == 0)
-    {
-        return collatz(%n / 2);
-    }
-    else
-    {
-        return collatz(%n * 3 + 1);
-    }
+    return $c;;
 }
 
 &main;

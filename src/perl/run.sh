@@ -1,3 +1,3 @@
 #!/bin/bash
-pp fib.pm -o fib.o
-time ./fib.o
+pp col.pm -o col.o
+time ./col.o
