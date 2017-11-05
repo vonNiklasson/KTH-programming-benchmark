@@ -12,7 +12,8 @@ public class fib {
         System.out.println(f);
     }
 
-    public static int fibonacci(int n) {
+    public static int fibonacci(int n)
+    {
         if (n <= 2)
         {
             return 1;
