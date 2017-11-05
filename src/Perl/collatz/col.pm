@@ -6,7 +6,7 @@ sub main
     my $i;
     my $j;
 
-    for ($j = 1; $j < 100; $j++)
+    for ($j = 0; $j < 100; $j++)
     {
         for ($i = 1; $i < 113382; $i++)
         {
