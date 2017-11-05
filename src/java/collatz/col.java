@@ -17,7 +17,8 @@ public class col
     {
         int c = 0;
 
-        while (n != 1) {
+        while (n != 1)
+        {
             if (n % 2 == 0)
             {
                 n = n / 2;
