@@ -1,8 +1,12 @@
 public class fib {
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         int f = 0;
-        for (int i = 0; i < 1; i++) {
+        int i;
+
+        for (i = 0; i < 1; i++)
+        {
             f = fibonacci(45);
         }
         System.out.println(f);
@@ -15,7 +19,7 @@ public class fib {
         }
         else
         {
-            return fibonacci(n - 1) + fibonacci(n - 2);
+            return (fibonacci(n - 1) + fibonacci(n - 2));
         }
     }
 }
