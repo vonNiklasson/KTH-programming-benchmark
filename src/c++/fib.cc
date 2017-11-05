@@ -23,7 +23,8 @@ int fibonacci(int n)
     {
         return 1;
     }
-    else {
+    else
+    {
         return (fibonacci(n - 1) + fibonacci(n - 2));
     }
 }
