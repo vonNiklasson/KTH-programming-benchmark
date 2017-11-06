@@ -1,3 +1,9 @@
+# Java
 *.class
+# C, C++ and more
 *.o
+# ?
 *.hi
+# Ada
+*.ali
+**/Ada/**/col

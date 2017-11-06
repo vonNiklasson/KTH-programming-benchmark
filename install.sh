@@ -1,1 +1,1 @@
-sudo apt-get install golang-go gdc
+sudo apt-get install golang-go gdc gnat
