@@ -22,7 +22,7 @@ main <- function()
 
     for (j in 0:100)
     {
-        for (i in 1:113382)
+        for (i in 1:100000)
         {
             f = f + collatz(i)
         }
