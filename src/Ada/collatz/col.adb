@@ -24,7 +24,7 @@ begin
     f := 0;
 
     for j in Integer range 1 .. 100 loop
-        for i in Integer range 1 .. 113381 loop
+        for i in Integer range 1 .. 100000 loop
             f := f + collatz(i);
         end loop;
     end loop;

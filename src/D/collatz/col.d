@@ -5,10 +5,10 @@ int main()
     int f = 0;
     int i;
     int j;
-    
+
     for (j = 0; j < 100; j++)
     {
-        for (i = 1; i < 113382; i++)
+        for (i = 1; i <= 100000; i++)
         {
             f = f + collatz(i);
         }
