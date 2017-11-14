@@ -1,12 +1,43 @@
-\documentclass{report}
+\documentclass[swedish]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[swedish]{babel}
+\usepackage[style=authoryear,backend=bibtex]{biblatex}
+\bibliography{bibliography.bib}
+
+%Quickfix för att få en vettig rubriknumrering
+\renewcommand{\thesection}{\arabic{section}}
 
 \title{Programmering och hastighet}
 \author{Johan Niklasson}
 \date{2017-11-10}
 
 \begin{document}
-    \maketitle
-    \tableofcontents
+\maketitle
+\tableofcontents
+
+\clearpage
+
+\section{Inledning}
+\subsection{Syfte}
+\subsection{Frågeställning}
+\subsection{Avgränsning}
+
+\section{Begrepp}
+\subsection{Programkod}
+\subsection{Processor}
+\subsection{Kompilering}
+\subsection{Nivåer på programspråk}
+\subsection{Collatz problem}
+
+\section{Metod}
+
+\section{Resultat}
+
+\section{Diskussion}
+
+\section{Slutsats}
+
+\section{Referenser}
+\printbibliography
+
 \end{document}
