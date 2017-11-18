@@ -1,45 +1,55 @@
-\documentclass[swedish]{report}
-\usepackage[utf8]{inputenc}
-\usepackage{csquotes}
-\usepackage[swedish]{babel}
-\usepackage[style=authoryear,backend=biber,texencoding=utf8,bibencoding=utf8]{biblatex}
-\addbibresource{bibliography.bib}
+\documentclass[12pt,swedish]{article}
 
-%Fix för att få en vettig rubriknumrering
-\renewcommand{\thesection}{\arabic{section}}
+% Språk
+\usepackage[swedish]{babel}
+\usepackage[utf8]{inputenc}
+
+% Referenser
+\usepackage[style=authoryear,backend=biber,texencoding=utf8,bibencoding=utf8]{biblatex}
+\usepackage{csquotes}
+\addbibresource{bibliography.bib}
 
 \title{Programmering och hastighet}
 \author{Johan Niklasson}
 \date{2017-11-10}
 
 \begin{document}
-\maketitle
-\tableofcontents
+    \maketitle
+    \begin{abstract}
+        For over a century, fingerprints have been an undisputed
+        personal identifier.  Recent court rulings have sparked
+        interest in verifying unique ...
+    \end{abstract}
+    % Så ingen sudnumrering sker på första sidan
+    \pagenumbering{gobble}
 
-\clearpage
+    \newpage
+    \pagenumbering{arabic}
+    \tableofcontents
+    \clearpage
 
-\section{Inledning}
-\subsection{Syfte}
-\subsection{Frågeställning}
-\subsection{Avgränsning}
-Test test test \cite{maloney_resnick_rusk_silverman_eastmond_2010}
+    \section{Inledning}
+    \subsection{Syfte}
+    \subsection{Frågeställning}
+    \subsection{Avgränsning}
+    Test test test \cite{maloney_resnick_rusk_silverman_eastmond_2010}
 
-\section{Begrepp}
-\subsection{Programkod}
-\subsection{Processor}
-\subsection{Kompilering}
-\subsection{Nivåer på programspråk}
-\subsection{Collatz problem}
+    \section{Begrepp}
+    \subsection{Programkod}
+    \subsection{Processor}
+    \subsection{Kompilering}
+    \subsection{Nivåer på programspråk}
+    \subsection{Collatz problem}
 
-\section{Metod}
+    \section{Metod}
 
-\section{Resultat}
+    \section{Resultat}
 
-\section{Diskussion}
+    \section{Diskussion}
 
-\section{Slutsats}
+    \section{Slutsats}
 
-\section{Referenser}
-\printbibliography
+    \section{Referenser}
+    \printbibliography
 
 \end{document}
