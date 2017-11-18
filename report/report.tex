@@ -3,27 +3,36 @@
 % Språk
 \usepackage[swedish]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{titling}
+\usepackage{listings}
 
 % Referenser
 \usepackage[style=authoryear,backend=biber,texencoding=utf8,bibencoding=utf8]{biblatex}
 \usepackage{csquotes}
 \addbibresource{bibliography.bib}
 
+% Add
+\postauthor{\end{tabular}\par jnikl@kth.se \par Grupp B:6\end{center}}
+
+%
 \title{Programmering och hastighet}
 \author{Johan Niklasson}
-\date{2017-11-10}
+\date{2017-11-20}
 
 \begin{document}
-    \maketitle
-    \begin{abstract}
-        For over a century, fingerprints have been an undisputed
-        personal identifier.  Recent court rulings have sparked
-        interest in verifying unique ...
-    \end{abstract}
-    % Så ingen sudnumrering sker på första sidan
+    % Så det inte blir någon sidnumrering sker på första sidan
     \pagenumbering{gobble}
+    \maketitle
+    \normalsize
+    \begin{center}
+        \begin{abstract}
+            For over a century, fingerprints have been an undisputed
+            personal identifier.  Recent court rulings have sparked
+            interest in verifying unique ...
+        \end{abstract}
+    \end{center}
+    \clearpage
 
-    \newpage
     \pagenumbering{arabic}
     \tableofcontents
     \clearpage
@@ -33,6 +42,14 @@
     \subsection{Frågeställning}
     \subsection{Avgränsning}
     Test test test \cite{maloney_resnick_rusk_silverman_eastmond_2010}
+
+    \begin{lstlisting}
+    IF condition THEN
+        sequence 1
+    ELSE
+        sequence 2
+    ENDIF
+    \end{lstlisting}
 
     \section{Begrepp}
     \subsection{Programkod}
