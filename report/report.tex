@@ -1,10 +1,11 @@
 \documentclass[swedish]{report}
 \usepackage[utf8]{inputenc}
+\usepackage{csquotes}
 \usepackage[swedish]{babel}
-\usepackage[style=authoryear,backend=bibtex]{biblatex}
-\bibliography{report.bib}
+\usepackage[style=authoryear,backend=biber,texencoding=utf8,bibencoding=utf8]{biblatex}
+\addbibresource{bibliography.bib}
 
-%Quickfix för att få en vettig rubriknumrering
+%Fix för att få en vettig rubriknumrering
 \renewcommand{\thesection}{\arabic{section}}
 
 \title{Programmering och hastighet}
@@ -21,6 +22,7 @@
 \subsection{Syfte}
 \subsection{Frågeställning}
 \subsection{Avgränsning}
+Test test test \cite{maloney_resnick_rusk_silverman_eastmond_2010}
 
 \section{Begrepp}
 \subsection{Programkod}
