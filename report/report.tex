@@ -5,9 +5,10 @@
 \usepackage[utf8]{inputenc}
 \usepackage{titling}
 \usepackage{listings}
+\usepackage{booktabs}
 
 % Referenser
-\usepackage[style=authoryear,backend=biber,texencoding=utf8,bibencoding=utf8]{biblatex}
+\usepackage[style=authoryear,backend=biber,texencoding=utf8,bibencoding=utf8,natbib]{biblatex}
 \usepackage{csquotes}
 \addbibresource{bibliography.bib}
 
@@ -20,53 +21,75 @@
 \date{2017-11-20}
 
 \begin{document}
-    % Så det inte blir någon sidnumrering sker på första sidan
-    \pagenumbering{gobble}
-    \maketitle
-    \normalsize
-    \begin{center}
-        \begin{abstract}
-            For over a century, fingerprints have been an undisputed
-            personal identifier.  Recent court rulings have sparked
-            interest in verifying unique ...
-        \end{abstract}
-    \end{center}
-    \clearpage
+% Så det inte blir någon sidnumrering sker på första sidan
+\pagenumbering{gobble}
 
-    \pagenumbering{arabic}
-    \tableofcontents
-    \clearpage
+% Titelsida
+\maketitle
+\normalsize
+\begin{center}
+    \begin{abstract}
+        For over a century, fingerprints have been an undisputed
+        personal identifier.  Recent court rulings have sparked
+        interest in verifying unique ...
+    \end{abstract}
+\end{center}
+\clearpage
 
-    \section{Inledning}
-    \subsection{Syfte}
-    \subsection{Frågeställning}
-    \subsection{Avgränsning}
-    Test test test \cite{maloney_resnick_rusk_silverman_eastmond_2010}
+% Börja sidnumreringen
+\pagenumbering{arabic}
 
-    \begin{lstlisting}
-    IF condition THEN
-        sequence 1
-    ELSE
-        sequence 2
-    ENDIF
-    \end{lstlisting}
+% Innehållsförteckning
+\tableofcontents
+\clearpage
 
-    \section{Begrepp}
-    \subsection{Programkod}
-    \subsection{Processor}
-    \subsection{Kompilering}
-    \subsection{Nivåer på programspråk}
-    \subsection{Collatz problem}
 
-    \section{Metod}
+\section{Inledning}
+\subsection{Syfte}
+\subsection{Frågeställning}
+\subsection{Avgränsning}
+Test test test \citep{maloney_resnick_rusk_silverman_eastmond_2010,bauer_wossner_1972}
 
-    \section{Resultat}
+\begin{lstlisting}
+IF condition THEN
+    sequence 1
+ELSE
+    sequence 2
+ENDIF
+\end{lstlisting}
 
-    \section{Diskussion}
+\section{Begrepp}
+\subsection{Programkod}
+\subsection{Processor}
+\subsection{Kompilering}
+\subsection{Nivåer på programspråk}
+\subsection{Collatz problem}
 
-    \section{Slutsats}
+\section{Metod}
 
-    \section{Referenser}
-    \printbibliography
+\section{Resultat}
+
+\begin{table}[]
+\centering
+\caption{Resultatdata}
+\label{table-result}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Utgivningsår & Programspråk & Exekveringstid & Popularitet (placering) \\ \midrule
+1972         & C            & 5.000 s        & 7.74\% (2)              \\
+1980         & Ada          & 4.452 s        & 0.78\% (25)             \\
+1983         & C++          & 4.744 s        & 5.18\% (3)              \\
+1995         & Java         & 3.312 s        & 16.38\% (1)             \\
+2001         & D            & 4.440 s        & 1.23\% (22)             \\
+2009         & Go           & 2.980 s        & 1.98\% (17)             \\ \bottomrule
+\end{tabular}
+\end{table}
+
+\section{Diskussion}
+
+\section{Slutsats}
+
+\section{Referenser}
+\printbibliography
 
 \end{document}
