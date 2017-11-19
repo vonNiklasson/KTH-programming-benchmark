@@ -5,7 +5,13 @@
 \usepackage[utf8]{inputenc}
 \usepackage{titling}
 \usepackage{listings}
+
+% Tabell
 \usepackage{booktabs}
+
+% Bilder
+\usepackage{graphicx}
+\graphicspath{ {images/} }
 
 % Referenser
 \usepackage[style=authoryear,backend=biber,texencoding=utf8,bibencoding=utf8,natbib]{biblatex}
@@ -28,11 +34,10 @@
 \maketitle
 \normalsize
 \begin{center}
-    \begin{abstract}
-        For over a century, fingerprints have been an undisputed
-        personal identifier.  Recent court rulings have sparked
-        interest in verifying unique ...
-    \end{abstract}
+
+\begin{abstract}
+Kan programspråk som lanserades för 45 år sedan vara snabbare än programspråk som lanseras idag? För att undersöka detta gjordes experiment med sex olika kompilerade programspråk med ett spann på 37 år mellan det äldsta och yngsta. Mätningarna gjordes med algoritmen Collatz problem, som programmerades i de olika språken och sedan kördes på en Raspberry Pi för att uppmäta hur lång tid varje programspråk tog på sig att lösa problemet. Studien visade att programspråken faktiskt har blivit snabbare med tiden, trots att vissa teorier motsätter sig resultatet.
+\end{abstract}
 \end{center}
 \clearpage
 
@@ -45,11 +50,32 @@
 
 
 \section{Inledning}
-\subsection{Syfte}
-\subsection{Frågeställning}
-\subsection{Avgränsning}
-Test test test \citep{maloney_resnick_rusk_silverman_eastmond_2010,bauer_wossner_1972}
+Ett programspråk är en formell och strikt uppsättning av instruktioner som en dator kan läsa för att utföra uppgifter. Sedan det första programspråket utvecklades i elektroniska komponenter år 1945 \citep{bauer_wossner_1972} har det lanserats flera hundra nya programspråk. Vissa programspråk utvecklas för att lösa specifika problem - programspråket Erlang av Ericsson som exempel skapades för styrsystemen i telefonväxlar \citep{armstrong_1997}. Andra språk, såsom Scratch, har tagits fram i undervisningssyfte för barn \citep{maloney_resnick_rusk_silverman_eastmond_2010}.
 
+Men även då vissa programspråk har haft vissa typer av uppgifter i beaktelse vid sin framtagning, har man även kunnat få programspråken att arbeta snabbare? Moores Lag som beskriver att antalet transistorer på chip växer potentiellt, resulterar i datorer och processorer blir snabbare varje år \citep{schaller_1997}. Kan det därför finnas ett mindre behov till att nyare programspråk inte behöver vara lika snabba utan kanske istället till exempel mer lättlästa för människor?
+
+\subsection{Syfte}
+Syftet med studien är att ta fram ett underlag om varför nya programspråk utges. Då det kan vara flera egenskaper som påverkar framtagningen och användningen av programspråk har ett fokus koncentrerats på en av dessa - beräkningshastigheten hos ett programspråk.
+
+\subsection{Frågeställning}
+Frågeställningen för studien är: “Finns det någon korrelation i beräkningshastighet och utgivningsår för kompilerade mellannivåspråk?”
+
+\subsection{Avgränsning}
+I studien är det endast intressant att jämföra språk med liknande egenskaper. Därför kommer endast kompilerbara mellannivåspråk att testas som går att exekveras (köras) och kompileras på en Raspberry Pi (en liten enkortsdator i storleken av ett kreditkort) i operativsystemet Raspbian.
+
+
+
+\section{Begrepp}
+I studien används ett antal termer som är relevanta för experimentet. I detta avsnitt kommer dessa förklaras förenklade för att underlätta vad de innebär.
+
+\subsection{Programkod}
+En programkod är en uppsättning instruktioner som utförs en dators processor. Instruktionerna består av jämförelser eller matematiska operationer av två värden som sedan utför efterföljande instruktioner beroende på resultatet.
+
+\subsection{Processor}
+Processorn brukar hänvisas som “hjärnan” i en dator som utför de flesta av instruktionerna från ett programspråk. Den här studien kommer enbart fokusera på tiden för de beräkningar som processorn utför. Instruktionerna som skickas till processorn kallas för maskinkod.
+
+\subsection{Kompilering}
+Att kompilera ett språk innebär att man skriver om beskrivande syntaxer till maskinkod som processorn kan läsa. I programmeringsspråk brukar en så kallad IF-sats, som kontrollerar villkor, skrivas som följande:
 \begin{lstlisting}
 IF condition THEN
     sequence 1
@@ -57,17 +83,49 @@ ELSE
     sequence 2
 ENDIF
 \end{lstlisting}
+Detta är inte programkod som processorn kan tolka utan behöver först skrivas om till instruktioner processorn kan läsa. Denna omskrivning kallas för kompilering. Ett program som kallas för kompilator gör just detta och skriver om den programkoden till det förväntade formatet, så kallad maskinkod \citep{srikant_shankar_2008}.
 
-\section{Begrepp}
-\subsection{Programkod}
-\subsection{Processor}
-\subsection{Kompilering}
 \subsection{Nivåer på programspråk}
+Inom programmering är det skillnad på hur programspråk fungerar på enheten de körs. I studien kommer endast mellannivåspråk att användas.
+\begin{description}
+    \item [Mellannivåspråk:] I ett mellannivåspråk kompileras programkoden innan den exekveras. Det kan liknas med att samtliga läses en gång och utförs sedan direkt efter varandra utan att behöva läsa om dem.
+    \item [Högnivåspråk:] Ett högnivåspråk kompilerar programkoden samtidigt som instruktionerna utförs. Det innebär att varje instruktion läses precis innan den utförs och resulterar därför i att programkoden exekveras långsammare än i ett mellannivåspråk \citep{maclachlan_1992}.
+\end{description}
+
+
 \subsection{Collatz problem}
+Collatz problem är ett olöst matematiskt problem inom talteorin. Problemet går ut på att utföra ett antal matematiska instruktioner eller i det här fallet kallat regler.
+\begin{enumerate}
+    \item [1.] Ta ett positivt heltal n som är större än ett.
+    \item [2.] Om talet är jämnt, dividera det med två. Om talet är udda, multiplicera det med tre och addera ett.
+    \item [3.] Repetera steg två tills talet når ett.
+\end{enumerate}
+I studien kommer detta problem skrivas om till en algoritm som utför stegen ovan för enskilda tal. Algoritmen används sedan för att utföra instruktioner som då går att mäta mot varandra i olika programspråk. Algoritmen använder endast addition, multiplikation, division och modulo (för att se om ett tal är jämnt eller udda) som matematiska operationer.
+
+Algoritmen är oförutsägbar i den mån att det inte finns något mönster för hur många steg den den kräver innan den når ett för olika tal. Detta har dock ingen inverkan i jämförelser mellan olika programspråk så länge samma tal jämförs.
 
 \section{Metod}
+Ett initialt urval på programspråk gjordes utifrån de mest använda programspråken idag (Tiobe.com, 2017). Detta gjordes för det skulle finnas en relevans till användning av de språk som ingick i studien. Av dessa 25 var det cirka hälften som var mellannivåspråk och ytterligare en halvering skedde efter att ha filtrerat bort de språk som inte var kompatibla på en Raspberry Pi. Språken med sina respektive utgivningsår som återstod blev då följande:
+
+\begin{itemize}
+    \item C (1972)
+    \item Ada (1980)
+    \item C++ (1983)
+    \item Java (1995)
+    \item D (2001)
+    \item Go (2009)
+\end{itemize}
+För att jämföra olika språk med varandra behövdes en typ av problem lösas. Problemet som användes i studien var Collatz problem som utförde olika matematiska operationer sekventiellt. Totalt användes sex språk, kategoriserade utifrån sitt utgivningsår.
+
+Collatz-algoritmen programmerades i de olika språken och kördes sedan från en funktion som testar algoritmen för alla tal mellan 1 till 100 000 och gör detta i sin tur 100 gånger. Ju längre tid algoritmen tar på sig, desto noggrannare mätvärden gick att jämföra med språken sinsemellan. För att få fram ett konsekvent mätvärde i tid användes en inbyggd timer i en Raspberry Pi, vilket endast hade som syfte att utföra tidsmätningar.
+
 
 \section{Resultat}
+Nedan presenteras de resultat som experimentet genererade. Alla tidsmätningar som presenteras anges i sekunder med tre decimaler.
+
+Tabell 1 presenterar den rådata som hämtades från de olika körningarna i experimentet. Språkets popularitet är även angivet i tabellen. Populariteten hämtades från “TIOBE Programming Community index” där urvalet av programspråken togs från. Populariteten mäts i antal sökträffar språket genererar i sökmotorer (Tiobe.com, 2017).
+
+Direkt till rådatan i tabell 1 kan man utläsa att det äldsta språket C i studien var långsammast medan det nyaste språket Go var snabbast. Ändå är C det näst mest använda språket på cirka 7.7\% medan Go förekommer på plats 17 med en popularitet på ungefär 2\%.
 
 \begin{table}[]
 \centering
@@ -84,6 +142,11 @@ Utgivningsår & Programspråk & Exekveringstid & Popularitet (placering) \\ \mid
 2009         & Go           & 2.980 s        & 1.98\% (17)             \\ \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{figure}
+    \includegraphics[width=1\textwidth,natwidth=600,natheight=371]{performance.png}
+    \caption{Exekveringstid över utgivningsår}
+\end{figure}
 
 \section{Diskussion}
 
