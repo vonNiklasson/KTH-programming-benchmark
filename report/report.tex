@@ -54,7 +54,7 @@ Kan programspråk som lanserades för 45 år sedan vara snabbare än programspr�
 \section{Inledning}
 Ett programspråk är en formell och strikt uppsättning av instruktioner som en dator kan läsa för att utföra uppgifter. Sedan det första programspråket utvecklades i elektroniska komponenter år 1945 \citep{bauer_wossner_1972} har det lanserats flera hundra nya programspråk. Vissa programspråk utvecklas för att lösa specifika problem - programspråket Erlang av Ericsson som exempel skapades för styrsystemen i telefonväxlar \citep{armstrong_1997}. Andra språk, såsom Scratch, har tagits fram i undervisningssyfte för barn \citep{maloney_resnick_rusk_silverman_eastmond_2010}.
 
-Men även då vissa programspråk har haft vissa typer av uppgifter i beaktelse vid sin framtagning, har dessa då samtidigt lyckats bli snabbare? Moores Lag som beskriver att antalet transistorer på chip växer potentiellt, resulterar i datorer och processorer blir snabbare varje år \citep{schaller_1997}. Kan det därför finnas ett mindre behov till att nyare programspråk inte behöver vara lika snabba utan kanske istället till exempel mer lättlästa för människor?
+Men även då vissa programspråk har haft vissa typer av uppgifter i hänsyn vid sin framtagning, har dessa då samtidigt lyckats bli snabbare? Moores Lag som beskriver att antalet transistorer på chip växer potentiellt, resulterar i datorer och processorer blir snabbare varje år \citep{schaller_1997}. Kan det därför finnas ett mindre behov av att nyare programspråk inte behöver vara lika snabba utan kanske istället till exempel mer lättlästa för människor?
 
 \subsection{Syfte}
 Syftet med studien är att ta fram ett underlag om varför nya programspråk lanseras. Då det kan vara flera egenskaper som påverkar framtagningen och användningen av programspråk har ett fokus koncentrerats på en av dessa - beräkningshastigheten hos ett programspråk.
@@ -73,10 +73,10 @@ I studien används ett antal termer som är relevanta för experimentet. I detta
 En programkod är en uppsättning instruktioner som utförs av en dators processor. Instruktionerna består av jämförelser eller matematiska operationer av två värden som sedan utför efterföljande instruktioner beroende på resultatet.
 
 \subsection{Processor}
-Processorn brukar hänvisas som “hjärnan” i en dator som utför de flesta av instruktionerna från ett programspråk \citep{charuba_1996}. Den här studien kommer enbart fokusera på tiden för de beräkningar som processorn utför. Instruktionerna som skickas till processorn kallas för maskinkod.
+Processorn brukar hänvisas som “hjärnan” i en dator som utför de flesta av instruktionerna från en programkod \citep{charuba_1996}. Den här studien kommer enbart fokusera på tiden för de beräkningar som processorn utför.
 
 \subsection{Kompilering}
-Att kompilera ett språk innebär att språket skrivs om från beskrivande syntaxer till maskinkod som processorn kan läsa. I programmeringsspråk brukar en så kallad IF-sats, som kontrollerar villkor, skrivas som följande:
+Att kompilera en programkod innebär att programkoden skrivs om från beskrivande syntaxer till maskinkod som processorn kan läsa. I programmeringsspråk brukar en så kallad IF-sats, som kontrollerar villkor, skrivas som följande:
 \begin{lstlisting}
 IF condition THEN
     sequence 1
@@ -84,7 +84,7 @@ ELSE
     sequence 2
 ENDIF
 \end{lstlisting}
-Detta är inte programkod som processorn kan tolka utan måste först skrivas om till instruktioner den kan läsa. Denna omskrivning kallas för kompilering. Ett program som kallas för kompilator gör just detta och skriver om den programkoden till det förväntade formatet, så kallad maskinkod \citep{srikant_shankar_2008}.
+Detta är inte programkod som processorn kan tolka utan måste först skrivas om till instruktioner den kan förstå. Denna omskrivning kallas för kompilering. Ett program som kallas för kompilator gör just detta och skriver om den programkoden till det förväntade formatet, så kallad maskinkod \citep{srikant_shankar_2008}.
 
 \subsection{Nivåer på programspråk}
 Inom programmering är det skillnad på hur programspråk fungerar på enheten de körs. I studien kommer endast mellannivåspråk att användas.
@@ -94,7 +94,7 @@ Inom programmering är det skillnad på hur programspråk fungerar på enheten d
 \end{description}
 
 \subsection{Collatz problem}
-Collatz problem är ett olöst matematiskt problem inom talteorin. Problemet går ut på att utföra ett antal matematiska instruktioner eller i det här fallet kallat regler.
+Collatz problem är ett olöst matematiskt problem inom talteorin. Problemet beskriver ett sätt utföra ett antal matematiska instruktioner i följd efter varandra för att nå ett sluttal. Instruktionerna är följande:
 \begin{enumerate}
     \item [1.] Välj ett positivt heltal \( n \) som är större än ett.
     \item [2.] Om \( n \) är jämnt, dividera det med två. Om \( n \) är udda, multiplicera det med tre och addera ett.
@@ -102,12 +102,12 @@ Collatz problem är ett olöst matematiskt problem inom talteorin. Problemet gå
 \end{enumerate}
 I studien kommer detta problem skrivas om till en algoritm som utför stegen ovan för enskilda tal. Algoritmen används sedan för att utföra instruktioner som då går att mäta mot varandra i olika programspråk. Algoritmen använder endast addition, multiplikation, division och modulo (för att se om ett tal är jämnt eller udda) som matematiska operationer.
 
-Algoritmen är oförutsägbar i den mån att det inte finns något mönster för hur många steg den den kräver innan den når ett för olika tal. Detta har dock ingen inverkan i jämförelser mellan olika programspråk så länge samma tal jämförs.
+Algoritmen är oförutsägbar för olika tal då det inte finns något mönster för hur många iterationer den kräver innan talet når ett. Detta har dock ingen inverkan i jämförelser mellan olika programspråk så länge samma tal jämförs, eftersom samma tal alltid genererar samma antal steg. 
 
 
 \newpage
 \section{Metod}
-Ett initialt urval på programspråk gjordes utifrån de mest använda programspråken idag \citep{tiobe}. Detta gjordes för det skulle finnas en relevans till användning av de språk som ingick i studien. Av dessa 25 var det cirka hälften som var mellannivåspråk och ytterligare en halvering skedde efter att ha filtrerat bort de språk som inte var kompatibla på en Raspberry Pi. Språken med sina respektive utgivningsår som återstod blev då följande:
+Ett initialt urval på programspråk gjordes utifrån de mest använda programspråken idag från \citeauthor{tiobe} (\citeyear{tiobe}). Detta gjordes för det skulle finnas en relevans till användning av de språk som ingick i studien. Av dessa 25 var det cirka hälften som var mellannivåspråk och ytterligare en halvering skedde efter att ha filtrerat bort de språk som inte var kompatibla på en Raspberry Pi. Språken med sina respektive utgivningsår som återstod blev då följande:
 
 \begin{itemize}
     \item C (1972)
@@ -128,7 +128,7 @@ Nedan presenteras de resultat som experimentet genererade. Alla tidsmätningar s
 
 % Tabell med rådata
 \begin{table}[H]
-Tabell \ref{table:result} presenterar den rådata som hämtades från de olika körningarna i experimentet. Språkets popularitet är även angivet i tabellen. Populariteten hämtades från “TIOBE Programming Community index” där urvalet av programspråken togs från. Populariteten mäts i antal sökträffar språket genererar i sökmotorer \citep{tiobe}.
+Tabell \ref{table:result} presenterar den rådata som hämtades från de olika körningarna i experimentet. Språkens popularitet är även angivet i tabellen. Populariteten hämtades från \citeauthor{tiobe} (\citeyear{tiobe}) där urvalet av programspråken togs från. Den procentuella populariteten mäts i antal sökträffar språket genererar i sökmotorer, delat på totala antalet träffar för alla språk tillsammans.
 
 Direkt till rådatan i tabell \ref{table:result} kan det utläsas att det äldsta språket C i studien var långsammast medan det nyaste språket Go var snabbast. Ändå är C det näst mest populära språket på cirka 7.7\% medan Go har en popularitet på ungefär 2\%.
 \begin{center}
@@ -175,11 +175,11 @@ I figur \ref{figure:popularity}, där programspråkens popularitet visas, blir s
 
 Programspråk som lanseras idag har en större förväntan på sig att kunna utföra fler avancerade operationer utan att behöva skriva lång programkod \citep{stroustrup_1997}. Detta gör att kodbasen (programspråkets byggstenar) för programspråken måste innehålla mer funktioner och operationer som tynger ner programmet, men lyckas ändå verka bli snabbare med tiden \citep{luong_2017}.
 
-Studien hade kunnat visa ett annat resultat om fler språk kunnats ta i beaktelse. Om dessutom högnivåspråk hade inkluderats skulle dessa kunnat stärka eller motbevisa resultatet. Kompilatorn för programspråk har även en viss inverkan i hur snabbt det kompilerade programmet blir \citep{srikant_shankar_2008}, något som inte tagits hänsyn till i den här studien. Även fler typer av algoritmer skulle kunna testats för att bekräfta respektive programspråks beräkningshastighet.
+Studien hade kunnat visa ett annat resultat om fler språk kunnat inkluderas. Om dessutom högnivåspråk hade inkluderats skulle dessa kunnat stärka eller motbevisa resultatet. Kompilatorn för programspråk har även en viss inverkan i hur snabbt det kompilerade programmet blir \citep{srikant_shankar_2008}, något som inte tagits hänsyn till i den här studien. Även fler typer av algoritmer skulle kunna testats för att bekräfta respektive programspråks beräkningshastighet.
 
 
 \section{Slutsats}
-Syftet med studien har varit att testa om beräkningshastigeten i programspråk har ett samband med hur gamla de är med hjälp av olika experiment. Trenden som visar att programspråken blir snabbare i sin beräkningshastighet med tiden skulle kunna ses som självklar då det finns mer vetskap för att utveckla programspråk idag än för 45 år sedan C först kom. Ett exempel på samma utveckling är att bilar blivit snabbare under samma tidsperiod. Programspråken har växt med fler operationer och funktioner, trots det har de inte blivit långsammare; utan tvärtom, blivit snabbare, vilket studien redovisat för.
+Syftet med studien har varit att testa om beräkningshastigheten i programspråk har ett samband med hur gamla de är med hjälp av olika experiment. Trenden som visar att programspråken blir snabbare i sin beräkningshastighet med tiden skulle kunna ses som självklar då det finns mer vetskap för att utveckla programspråk idag än för 45 år sedan C först kom. Ett exempel på samma utveckling är att bilar blivit snabbare under samma tidsperiod. Programspråken har växt med fler operationer och funktioner, trots det har de inte blivit långsammare; utan tvärtom, blivit snabbare, vilket studien redovisat för.
 
 Frågeställningen har besvarats, även om det finns fler aspekter att tillämpa för att få ett bredare resultat och ett starkare bevis på att trenden stämmer.
 
