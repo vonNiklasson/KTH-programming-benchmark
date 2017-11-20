@@ -63,7 +63,7 @@ Syftet med studien är att ta fram ett underlag om varför nya programspråk lan
 Frågeställningen för studien är: “Finns det någon korrelation i beräkningshastighet och utgivningsår för kompilerade mellannivåspråk?”
 
 \subsection{Avgränsning}
-I studien är det endast intressant att jämföra språk med liknande egenskaper. Därför kommer endast kompilerbara mellannivåspråk att testas som går att exekveras (köras) och kompileras på en Raspberry Pi (en liten enkortsdator i storleken av ett kreditkort) i operativsystemet Raspbian.
+I studien är det endast intressant att jämföra språk med liknande egenskaper. Därför kommer endast kompilerbara mellannivåspråk att testas som går att exekveras (köras) och kompileras på en Raspberry Pi (en liten enkortsdator i storleken av ett kreditkort).
 
 
 \section{Begrepp}
@@ -104,10 +104,13 @@ I studien kommer detta problem skrivas om till en algoritm som utför stegen ova
 
 Algoritmen är oförutsägbar för olika tal då det inte finns något mönster för hur många iterationer den kräver innan talet når ett. Detta har dock ingen inverkan i jämförelser mellan olika programspråk så länge samma tal jämförs, eftersom samma tal alltid genererar samma antal steg. 
 
+\subsection{Raspberry Pi}
+Raspberry Pi är en enkortsdator, som refererar till att alla datorns komponenter får plats på ett enda kretskort. Datorn är ungefär lika stor som ett kreditkort och använder sig av operativsystemet Linux som är brett använt inom programmering och utveckling \citep{andrews_2013}. Datorn är lämplig för tester då den har få processer och program som kan påverka tidsmätningar, jämfört med till exempel en vanlig PC.
+
 
 \newpage
 \section{Metod}
-Ett initialt urval på programspråk gjordes utifrån de mest använda programspråken idag från \citeauthor{tiobe} (\citeyear{tiobe}). Detta gjordes för det skulle finnas en relevans till användning av de språk som ingick i studien. Av dessa 25 var det cirka hälften som var mellannivåspråk och ytterligare en halvering skedde efter att ha filtrerat bort de språk som inte var kompatibla på en Raspberry Pi. Språken med sina respektive utgivningsår som återstod blev då följande:
+Ett initialt urval på programspråk gjordes utifrån de mest populära programspråken idag från \citeauthor{tiobe} (\citeyear{tiobe}) (TODO: Inkludera bilaga). Detta gjordes för att få ett urval med språk som faktiskt används. Av dessa 25 var det cirka hälften som var mellannivåspråk och ytterligare en halvering skedde efter att ha filtrerat bort de språk som inte var kompatibla på en Raspberry Pi. Språken med sina respektive utgivningsår som återstod blev då följande:
 
 \begin{itemize}
     \item C (1972)
@@ -119,7 +122,8 @@ Ett initialt urval på programspråk gjordes utifrån de mest använda programsp
 \end{itemize}
 För att jämföra olika språk med varandra behövdes en typ av problem lösas. Problemet som användes i studien var Collatz problem som utförde olika matematiska operationer sekventiellt. Totalt användes sex språk, kategoriserade utifrån sitt utgivningsår.
 
-Collatz-algoritmen programmerades i de olika språken och kördes sedan från en funktion som testar algoritmen för alla tal mellan 1 till 100 000 och gör detta i sin tur 100 gånger. Ju längre tid algoritmen tar på sig, desto noggrannare mätvärden gick att jämföra med språken sinsemellan. För att få fram ett konsekvent mätvärde i tid användes en inbyggd timer i en Raspberry Pi, vilket endast hade som syfte att utföra tidsmätningar.
+Collatz proble programmerades som en algoritm i de olika språken (TODO: Hänvisa till bilaga).
+Därefter kompilerades och exekverades algoritmen under tidsmätning. Algoritmen körde alla tal mellan 2 till 100 000, och gjorde detta 100 gånger om. Ju längre tid algoritmen tog på sig, desto noggrannare mätvärden gick att jämföra med språken sinsemellan. För att få fram ett konsekvent mätvärde i tid användes en inbyggd timer i en Raspberry Pi, vilket endast hade som syfte att utföra tidsmätningar.
 
 
 \newpage
@@ -169,9 +173,9 @@ Figur \ref{figure:popularity} presenterar i tidsordning populariteten för de ol
 
 
 \section{Diskussion}
-Om endast trendlinjen i figur \ref{figure:performance} beaktas kan en logisk följd dras att det är en fallande trend, det vill säga att exekveringstiden i programspråk blir snabbare med tiden. Ändå är det långsammaste språket C ändå det näst mest populära språket på cirka 7.7\%, jämfört med Go som var snabbast men endast hade en popularitet på ungefär 2\%. Detta kan naturligtvis bero på att C har funnits i 37 år längre än Go och därför hunnit användas till fler applikationer samt att det kanske inte lönar sig att lägga ner den tid som krävs för att skriva om program från C till Go.
+Om endast trendlinjen i figur \ref{figure:performance} beaktas kan en logisk följd dras att det är en fallande trend, det vill säga att exekveringstiden i programspråk blir snabbare med tiden. Ändå är det långsammaste språket C det näst mest populära språket på cirka 7.7\%, jämfört med Go som var snabbast men endast hade en popularitet på ungefär 2\%. Detta kan naturligtvis bero på att C har funnits i 37 år längre än Go och därför hunnit användas till fler applikationer samt att det kanske inte lönar sig att lägga ner den tid som krävs för att skriva om program från C till Go.
 
-I figur \ref{figure:popularity}, där programspråkens popularitet visas, blir sambanden inte lika tydliga. Att Ada och D är såpass låga på skalan skulle kunna resoneras utifrån  deras långsamma beräkningshastighet, vilket däremot motsätts med C++ som är långsammare än de båda men över dubbelt så populärt som de tidigare två tillsammans. Det mest populära programspråket är Java på strax över 16\% med utgivningsår 1995, 23 år yngre och mer än dubbelt så populärt än C som är näst mest populärt. Den höga populariteten i Java kan bero på att operativsystemet Android är byggt på samma språk vilket gör att även en stor del av apputveckling till mobiltelefoner sker i Java \citep{gruman_2017}.
+I figur \ref{figure:popularity}, där programspråkens popularitet visas, blir sambanden inte lika tydliga. Att Ada och D är såpass långt ner i grafen skulle kunna resoneras från deras långsamma beräkningshastighet, vilket dock motsätts med C++ som är långsammare men över dubbelt så populärt som både C och Ada tillsammans. Det mest populära programspråket är Java på strax över 16\% med utgivningsår 1995, 23 år yngre och mer än dubbelt så populärt än C som är näst mest populärt. En bidragande faktor i Javas popularitet kan troligtvis härledas till att operativsystemet Android och dessa appar bygger på samma språk \citep{gruman_2017}.
 
 Programspråk som lanseras idag har en större förväntan på sig att kunna utföra fler avancerade operationer utan att behöva skriva lång programkod \citep{stroustrup_1997}. Detta gör att kodbasen (programspråkets byggstenar) för programspråken måste innehålla mer funktioner och operationer som tynger ner programmet, men lyckas ändå verka bli snabbare med tiden \citep{luong_2017}.
 
