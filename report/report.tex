@@ -12,10 +12,8 @@
 
 % Bilagor och se till att de visas på svenska
 \usepackage[toc,page]{appendix}
-\addto\captionsswedish{%
-  \renewcommand\appendixname{Bilaga}
-  \renewcommand\appendixpagename{Bilagor}
-}
+\renewcommand\appendixtocname{Bilagor}
+\renewcommand\appendixpagename{Bilagor}
 
 % Bilder
 \usepackage{graphicx}
@@ -33,6 +31,12 @@
 \title{Finns det samband mellan ett programspråks ålder och dess beräkningshastighet?}
 \author{Johan Niklasson}
 \date{2017-11-20}
+
+
+
+
+\appto\listoffigures{\addtocontents{lof}{\protect\setcounter{tocdepth}{1}}}
+\appto\listoftables{\addtocontents{lot}{\protect\setcounter{tocdepth}{1}}}
 
 % Öppna dokumentet
 \begin{document}
@@ -61,12 +65,11 @@ Kan programspråk som lanserades för 45 år sedan vara snabbare än programspr�
 \clearpage
 
 
-\section{Inledning}
+\section{Inledning och syfte}
 Ett programspråk är en formell och strikt uppsättning av instruktioner som en dator kan läsa för att utföra uppgifter. Sedan det första programspråket utvecklades i elektroniska komponenter år 1945 \citep{bauer_wossner_1972} har det lanserats flera hundra nya programspråk. Vissa programspråk utvecklas för att lösa specifika problem - programspråket Erlang av Ericsson som exempel skapades för styrsystemen i telefonväxlar \citep{armstrong_1997}. Andra språk, såsom Scratch, har tagits fram i undervisningssyfte för barn \citep{maloney_resnick_rusk_silverman_eastmond_2010}.
 
 Men även då vissa programspråk har haft vissa typer av uppgifter i hänsyn vid sin framtagning, har dessa då samtidigt lyckats bli snabbare? Moores Lag som beskriver att antalet transistorer på chip växer potentiellt, resulterar i datorer och processorer blir snabbare varje år \citep{schaller_1997}. Kan det därför finnas ett mindre behov av att nyare programspråk inte behöver vara lika snabba utan kanske istället till exempel mer lättlästa för människor?
 
-\subsection{Syfte}
 Syftet med studien är att ta fram ett underlag om varför nya programspråk lanseras. Då det kan vara flera egenskaper som påverkar framtagningen och användningen av programspråk har ett fokus koncentrerats på en av dessa - beräkningshastigheten hos ett programspråk.
 
 \subsection{Frågeställning}
@@ -203,10 +206,11 @@ Frågeställningen har besvarats, även om det finns fler aspekter att tillämpa
 
 \begin{appendices}
 
-\addcontentsline{toc}{section}{Bilagor}
+% Göm subsections, det blir bara plottrigt här
+\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
 
 % Bilaga med programspråk
-\section{\\Urval av programspråk}
+\section{Urval av programspråk}
 \begin{table}[H]
 \centering
 \label{appendix:table:languages}
@@ -241,6 +245,280 @@ Placering & Programspråk         & Popularitet \\ \midrule
 \end{tabular}
 \end{table}
 
+\clearpage
+
+\section{Programkoder}
+
+\lstset{basicstyle=\ttfamily\scriptsize,
+        keywordstyle=\color{blue}\ttfamily,
+        stringstyle=\color{red}\ttfamily,
+        commentstyle=\color{green}\ttfamily,
+        breaklines=true
+}
+
+\subsection{Ada}
+\begin{lstlisting}[language=ada]
+with Gnat.Io; use Gnat.Io;
+procedure col is
+    function collatz(n1: Integer) return Integer is
+        c: Integer;
+        n: Integer;
+    begin
+        n := n1;
+        c := 0;
+
+        while n /= 1 loop
+            if n mod 2 = 0 then
+                n := n / 2;
+            else
+                n := n * 3 + 1;
+            end if;
+            c := c + 1;
+        end loop;
+
+        return c;
+    end;
+
+   f: Integer;
+begin
+    f := 0;
+
+    for j in Integer range 1 .. 100 loop
+        for i in Integer range 1 .. 100000 loop
+            f := f + collatz(i);
+        end loop;
+    end loop;
+
+    Put(f);
+    New_Line;
+end col;
+\end{lstlisting}
+
+
+\newpage
+\subsection{C}
+\begin{lstlisting}[language=c]
+#include <stdio.h>
+
+
+int collatz(int);
+
+int main()
+{
+    int f = 0;
+    int i;
+    int j;
+
+    for (j = 0; j < 100; j++)
+    {
+        for (i = 1; i <= 100000; i++)
+        {
+            f = f + collatz(i);
+        }
+    }
+
+    printf("%d\n", f);
+
+    return 0;
+}
+
+int collatz(int n)
+{
+    int c = 0;
+
+    while (n != 1)
+    {
+        if (n % 2 == 0)
+        {
+            n = n / 2;
+        }
+        else
+        {
+            n = n * 3 + 1;
+        }
+        c = c + 1;
+    }
+
+    return c;
+}
+\end{lstlisting}
+
+
+\newpage
+\subsection{C++}
+\begin{lstlisting}[language=c++]
+#include <iostream>
+using namespace std;
+
+int collatz(int);
+
+int main()
+{
+    int f = 0;
+    int i;
+    int j;
+
+    for (j = 0; j < 100; j++)
+    {
+        for (i = 1; i <= 100000; i++)
+        {
+            f = f + collatz(i);
+        }
+    }
+
+    cout << f << endl;
+
+    return 0;
+}
+
+int collatz(int n)
+{
+    int c = 0;
+
+    while (n != 1)
+    {
+        if (n % 2 == 0)
+        {
+            n = n / 2;
+        }
+        else
+        {
+            n = n * 3 + 1;
+        }
+        c = c + 1;
+    }
+
+    return c;
+}
+\end{lstlisting}
+
+
+\newpage
+\subsection{D}
+\begin{lstlisting}[language=C]
+import std.stdio;
+
+int main()
+{
+    int f = 0;
+    int i;
+    int j;
+
+    for (j = 0; j < 100; j++)
+    {
+        for (i = 1; i <= 100000; i++)
+        {
+            f = f + collatz(i);
+        }
+    }
+
+    writeln(f);
+
+    return 0;
+}
+
+int collatz(int n)
+{
+    int c = 0;
+
+    while (n != 1)
+    {
+        if (n % 2 == 0)
+        {
+            n = n / 2;
+        }
+        else
+        {
+            n = n * 3 + 1;
+        }
+        c = c + 1;
+    }
+
+    return c;
+}
+\end{lstlisting}
+
+\newpage
+\subsection{Go}
+\begin{lstlisting}[language=Python]
+package main
+
+import (
+    "fmt"
+)
+
+func main() {
+    f := 0
+
+    for j := 0; j < 100; j++ {
+        for i := 1; i <= 100000; i++ {
+            f = f + collatz(i)
+        }
+    }
+
+    fmt.Println(f)
+}
+
+func collatz(n int) int {
+    c := 0
+
+    for n > 1 {
+        if n % 2 == 0 {
+            n = n / 2
+        } else {
+            n = 3 * n + 1
+        }
+        c = c + 1
+    }
+
+    return c
+}
+\end{lstlisting}
+
+
+\newpage
+\subsection{Java}
+\begin{lstlisting}[language=java]
+public class col
+{
+    public static void main(String[] args)
+    {
+        int f = 0;
+        int i;
+        int j;
+
+        for (j = 0; j < 100; j++)
+        {
+            for (i = 1; i <= 100000; i++)
+            {
+                f = f + collatz(i);
+            }
+        }
+
+        System.out.println(f);
+    }
+
+    public static int collatz(int n)
+    {
+        int c = 0;
+
+        while (n != 1)
+        {
+            if (n % 2 == 0)
+            {
+                n = n / 2;
+            }
+            else
+            {
+                n = n * 3 + 1;
+            }
+            c = c + 1;
+        }
+
+        return c;
+    }
+}
+\end{lstlisting}
 
 \end{appendices}
 
