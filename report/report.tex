@@ -1,4 +1,6 @@
 \documentclass[12pt,swedish]{article}
+% För att inkludera programkoder
+\usepackage[final]{pdfpages}
 
 % Språk
 \usepackage[swedish]{babel}
@@ -11,7 +13,8 @@
 \usepackage{float}
 
 % Bilagor och se till att de visas på svenska
-\usepackage[toc,page]{appendix}
+\usepackage[title,titletoc]{appendix}
+\renewcommand\appendixname{Bilaga}
 \renewcommand\appendixtocname{Bilagor}
 \renewcommand\appendixpagename{Bilagor}
 
@@ -33,8 +36,6 @@
 \date{2017-11-20}
 
 
-
-
 \appto\listoffigures{\addtocontents{lof}{\protect\setcounter{tocdepth}{1}}}
 \appto\listoftables{\addtocontents{lot}{\protect\setcounter{tocdepth}{1}}}
 
@@ -54,9 +55,6 @@ Kan programspråk som lanserades för 45 år sedan vara snabbare än programspr�
 \end{center}
 \clearpage
 
-% Börja sidnumreringen
-\pagenumbering{arabic}
-
 % Innehållsförteckning
 \tableofcontents
 
@@ -64,12 +62,16 @@ Kan programspråk som lanserades för 45 år sedan vara snabbare än programspr�
 \listoffigures
 \clearpage
 
+% Börja sidnumreringen
+\pagenumbering{arabic}
 
-\section{Inledning och syfte}
+
+\section{Inledning}
 Ett programspråk är en formell och strikt uppsättning av instruktioner som en dator kan läsa för att utföra uppgifter. Sedan det första programspråket utvecklades i elektroniska komponenter år 1945 \citep{bauer_wossner_1972} har det lanserats flera hundra nya programspråk. Vissa programspråk utvecklas för att lösa specifika problem - programspråket Erlang av Ericsson som exempel skapades för styrsystemen i telefonväxlar \citep{armstrong_1997}. Andra språk, såsom Scratch, har tagits fram i undervisningssyfte för barn \citep{maloney_resnick_rusk_silverman_eastmond_2010}.
 
 Men även då vissa programspråk har haft vissa typer av uppgifter i hänsyn vid sin framtagning, har dessa då samtidigt lyckats bli snabbare? Moores Lag som beskriver att antalet transistorer på chip växer potentiellt, resulterar i datorer och processorer blir snabbare varje år \citep{schaller_1997}. Kan det därför finnas ett mindre behov av att nyare programspråk inte behöver vara lika snabba utan kanske istället till exempel mer lättlästa för människor?
 
+\subsection{Syfte}
 Syftet med studien är att ta fram ett underlag om varför nya programspråk lanseras. Då det kan vara flera egenskaper som påverkar framtagningen och användningen av programspråk har ett fokus koncentrerats på en av dessa - beräkningshastigheten hos ett programspråk.
 
 \subsection{Frågeställning}
@@ -123,7 +125,7 @@ Raspberry Pi är en enkortsdator, som refererar till att alla datorns komponente
 
 \newpage
 \section{Metod}
-Ett initialt urval på programspråk gjordes utifrån de mest populära programspråken idag från \citetitle{tiobe} (\citeyear{tiobe}) (TODO: Inkludera bilaga). Detta gjordes för att få ett urval med språk som faktiskt används. Av dessa 25 var det cirka hälften som var mellannivåspråk och ytterligare en halvering skedde efter att ha filtrerat bort de språk som inte var kompatibla på en Raspberry Pi. Språken med sina respektive utgivningsår som återstod blev då följande:
+Ett initialt urval på programspråk gjordes utifrån de mest populära programspråken idag från \citetitle{tiobe} (\citeyear{tiobe}), som även går att finna som bilaga \ref{appendix:languages}. Detta gjordes för att få ett urval med språk som faktiskt används. Av dessa 25 var det cirka hälften som var mellannivåspråk och ytterligare en halvering skedde efter att ha filtrerat bort de språk som inte var kompatibla på en Raspberry Pi. Språken med sina respektive utgivningsår som återstod blev då följande:
 
 \begin{itemize}
     \item C (1972)
@@ -135,7 +137,7 @@ Ett initialt urval på programspråk gjordes utifrån de mest populära programs
 \end{itemize}
 För att jämföra olika språk med varandra behövdes en typ av problem lösas. Problemet som användes i studien var Collatz problem som utförde olika matematiska operationer sekventiellt. Totalt användes sex språk, kategoriserade utifrån sitt utgivningsår.
 
-Collatz problem programmerades som en algoritm i de olika språken (TODO: Hänvisa till bilaga).
+Collatz problem programmerades som en algoritm i de olika språken (se bilaga \ref{appendix:programcodes}).
 Därefter kompilerades och exekverades algoritmen under tidsmätning. Algoritmen körde alla tal mellan 2 till 100 000, och gjorde detta 100 gånger om. Ju längre tid algoritmen tog på sig, desto noggrannare mätvärden gick att jämföra med språken sinsemellan. För att få fram ett konsekvent mätvärde i tid användes en inbyggd timer i en Raspberry Pi, vilket endast hade som syfte att utföra tidsmätningar.
 
 
@@ -188,7 +190,7 @@ Figur \ref{figure:popularity} presenterar i tidsordning populariteten för de ol
 \section{Diskussion}
 Om endast trendlinjen i figur \ref{figure:performance} beaktas kan en logisk följd dras att det är en fallande trend, det vill säga att exekveringstiden i programspråk blir snabbare med tiden. Ändå är det långsammaste språket C det näst mest populära språket på cirka 7.7\%, jämfört med Go som var snabbast men endast hade en popularitet på ungefär 2\%. Detta kan naturligtvis bero på att C har funnits i 37 år längre än Go och därför hunnit användas till fler applikationer samt att det kanske inte lönar sig att lägga ner den tid som krävs för att skriva om program från C till Go.
 
-I figur \ref{figure:popularity}, där programspråkens popularitet visas, blir sambanden inte lika tydliga. Att Ada och D är såpass långt ner i grafen skulle kunna resoneras från deras långsamma beräkningshastighet, vilket dock motsätts med C++ som är långsammare men över dubbelt så populärt som både C och Ada tillsammans. Det mest populära programspråket är Java på strax över 16\% med utgivningsår 1995, 23 år yngre och mer än dubbelt så populärt än C som är näst mest populärt. En bidragande faktor i Javas popularitet kan troligtvis härledas till att operativsystemet Android och dessa appar bygger på samma språk \citep{gruman_2017}.
+I figur \ref{figure:popularity}, där programspråkens popularitet visas, blir sambanden inte lika tydliga. Att Ada och D är såpass långt ner i grafen skulle kunna resoneras från deras långsamma beräkningshastighet, vilket dock motsätts med C++ som är långsammare men över dubbelt så populärt som både D och Ada tillsammans. Det mest populära programspråket är Java på strax över 16\% med utgivningsår 1995, 23 år yngre och mer än dubbelt så populärt än C som är näst mest populärt. En bidragande faktor till Javas popularitet kan troligtvis härledas till att operativsystemet Android och dessa appar bygger på samma språk \citep{gruman_2017}.
 
 Programspråk som lanseras idag har en större förväntan på sig att kunna utföra fler avancerade operationer utan att behöva skriva lång programkod \citep{stroustrup_1997}. Detta gör att kodbasen (programspråkets byggstenar) för programspråken måste innehålla mer funktioner och operationer som tynger ner programmet, men lyckas ändå verka bli snabbare med tiden \citep{luong_2017}.
 
@@ -200,17 +202,20 @@ Syftet med studien har varit att testa om beräkningshastigheten i programspråk
 
 Frågeställningen har besvarats, även om det finns fler aspekter att tillämpa för att få ett bredare resultat och ett starkare bevis på att trenden stämmer.
 
-% Skriv ut referenser
+% Skriv ut referenser i innehållsförteckningen
 \addcontentsline{toc}{section}{Referenser}
 \printbibliography
 
+% Rensa sidan, och ta bort sudnumreringen efter bilagor börjar
+\clearpage
 \begin{appendices}
+\pagenumbering{gobble}
 
 % Göm subsections, det blir bara plottrigt här
 \addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
 
 % Bilaga med programspråk
-\section{Urval av programspråk}
+\section{Urval av programspråk}\label{appendix:languages}
 \begin{table}[H]
 \centering
 \label{appendix:table:languages}
@@ -247,7 +252,7 @@ Placering & Programspråk         & Popularitet \\ \midrule
 
 \clearpage
 
-\section{Programkoder}
+\section{Programkoder}\label{appendix:programcodes}
 
 \lstset{basicstyle=\ttfamily\scriptsize,
         keywordstyle=\color{blue}\ttfamily,
