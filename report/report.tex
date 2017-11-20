@@ -10,6 +10,13 @@
 \usepackage{booktabs}
 \usepackage{float}
 
+% Bilagor och se till att de visas på svenska
+\usepackage[toc,page]{appendix}
+\addto\captionsswedish{%
+  \renewcommand\appendixname{Bilaga}
+  \renewcommand\appendixpagename{Bilagor}
+}
+
 % Bilder
 \usepackage{graphicx}
 \graphicspath{{images/}}
@@ -48,6 +55,9 @@ Kan programspråk som lanserades för 45 år sedan vara snabbare än programspr�
 
 % Innehållsförteckning
 \tableofcontents
+
+\listoftables
+\listoffigures
 \clearpage
 
 
@@ -102,7 +112,7 @@ Collatz problem är ett olöst matematiskt problem inom talteorin. Problemet bes
 \end{enumerate}
 I studien kommer detta problem skrivas om till en algoritm som utför stegen ovan för enskilda tal. Algoritmen används sedan för att utföra instruktioner som då går att mäta mot varandra i olika programspråk. Algoritmen använder endast addition, multiplikation, division och modulo (för att se om ett tal är jämnt eller udda) som matematiska operationer.
 
-Algoritmen är oförutsägbar för olika tal då det inte finns något mönster för hur många iterationer den kräver innan talet når ett. Detta har dock ingen inverkan i jämförelser mellan olika programspråk så länge samma tal jämförs, eftersom samma tal alltid genererar samma antal steg. 
+Algoritmen är oförutsägbar för olika tal då det inte finns något mönster för hur många iterationer den kräver innan talet når ett. Detta har dock ingen inverkan i jämförelser mellan olika programspråk så länge samma tal jämförs, eftersom samma tal alltid genererar samma antal steg.
 
 \subsection{Raspberry Pi}
 Raspberry Pi är en enkortsdator, som refererar till att alla datorns komponenter får plats på ett enda kretskort. Datorn är ungefär lika stor som ett kreditkort och använder sig av operativsystemet Linux som är brett använt inom programmering och utveckling \citep{andrews_2013}. Datorn är lämplig för tester då den har få processer och program som kan påverka tidsmätningar, jämfört med till exempel en vanlig PC.
@@ -110,7 +120,7 @@ Raspberry Pi är en enkortsdator, som refererar till att alla datorns komponente
 
 \newpage
 \section{Metod}
-Ett initialt urval på programspråk gjordes utifrån de mest populära programspråken idag från \citeauthor{tiobe} (\citeyear{tiobe}) (TODO: Inkludera bilaga). Detta gjordes för att få ett urval med språk som faktiskt används. Av dessa 25 var det cirka hälften som var mellannivåspråk och ytterligare en halvering skedde efter att ha filtrerat bort de språk som inte var kompatibla på en Raspberry Pi. Språken med sina respektive utgivningsår som återstod blev då följande:
+Ett initialt urval på programspråk gjordes utifrån de mest populära programspråken idag från \citetitle{tiobe} (\citeyear{tiobe}) (TODO: Inkludera bilaga). Detta gjordes för att få ett urval med språk som faktiskt används. Av dessa 25 var det cirka hälften som var mellannivåspråk och ytterligare en halvering skedde efter att ha filtrerat bort de språk som inte var kompatibla på en Raspberry Pi. Språken med sina respektive utgivningsår som återstod blev då följande:
 
 \begin{itemize}
     \item C (1972)
@@ -132,11 +142,11 @@ Nedan presenteras de resultat som experimentet genererade. Alla tidsmätningar s
 
 % Tabell med rådata
 \begin{table}[H]
-Tabell \ref{table:result} presenterar den rådata som hämtades från de olika körningarna i experimentet. Språkens popularitet är även angivet i tabellen. Populariteten hämtades från \citeauthor{tiobe} (\citeyear{tiobe}) där urvalet av programspråken togs från. Den procentuella populariteten mäts i antal sökträffar språket genererar i sökmotorer, delat på totala antalet träffar för alla språk tillsammans.
+Tabell \ref{table:result} presenterar den rådata som hämtades från de olika körningarna i experimentet. Språkens popularitet är även angivet i tabellen. Populariteten hämtades från \citetitle{tiobe} (\citeyear{tiobe}) där urvalet av programspråken togs från. Den procentuella populariteten mäts i antal sökträffar språket genererar i sökmotorer, delat på totala antalet träffar för alla språk tillsammans.
 
 Direkt till rådatan i tabell \ref{table:result} kan det utläsas att det äldsta språket C i studien var långsammast medan det nyaste språket Go var snabbast. Ändå är C det näst mest populära språket på cirka 7.7\% medan Go har en popularitet på ungefär 2\%.
 \begin{center}
-\caption{Resultatdata}
+\caption{Mätvärden}
 \label{table:result}
 \begin{tabular}{@{}llll@{}}
 \toprule
@@ -187,9 +197,52 @@ Syftet med studien har varit att testa om beräkningshastigheten i programspråk
 
 Frågeställningen har besvarats, även om det finns fler aspekter att tillämpa för att få ett bredare resultat och ett starkare bevis på att trenden stämmer.
 
-
 % Skriv ut referenser
+\addcontentsline{toc}{section}{Referenser}
 \printbibliography
+
+\begin{appendices}
+
+\addcontentsline{toc}{section}{Bilagor}
+
+% Bilaga med programspråk
+\section{\\Urval av programspråk}
+\begin{table}[H]
+\centering
+\label{appendix:table:languages}
+\begin{tabular}{lll}
+\toprule
+Placering & Programspråk         & Popularitet \\ \midrule
+1         & Java                 & 16.38\%     \\
+2         & C                    & 7.74\%      \\
+3         & C++                  & 5.18\%      \\
+4         & C\#                  & 4.41\%      \\
+5         & Python               & 3.92\%      \\
+6         & Visual Basic .NET    & 3.17\%      \\
+7         & PHP                  & 3.01\%      \\
+8         & JavaScript           & 2.67\%      \\
+9         & Delphi/Object Pascal & 2.54\%      \\
+10        & Swift                & 2.27\%      \\
+11        & Perl                 & 2.26\%      \\
+12        & Ruby                 & 2.25\%      \\
+13        & Assembly language    & 2.23\%      \\
+14        & R                    & 2.02\%      \\
+15        & Visual Basic         & 2.01\%      \\
+16        & Objective-C          & 2.00\%      \\
+17        & Go                   & 1.98\%      \\
+18        & MATLAB               & 1.85\%      \\
+19        & PL/SQL               & 1.67\%      \\
+20        & Scratch              & 1.47\%      \\
+21        & SAS                  & 1.29\%      \\
+22        & D                    & 1.23\%      \\
+23        & Dart                 & 1.20\%      \\
+24        & ABAP                 & 1.15\%      \\
+25        & Ada                  & 0.78\%      \\ \bottomrule
+\end{tabular}
+\end{table}
+
+
+\end{appendices}
 
 % Stäng dokumentet
 \end{document}
