@@ -50,7 +50,7 @@
 \begin{center}
 
 \begin{abstract}
-Kan programspråk som lanserades för 45 år sedan vara snabbare än programspråk som lanseras idag? För att undersöka detta gjordes experiment på sex olika kompilerade programspråk med ett spann på 37 år mellan det äldsta och yngsta. Mätningarna gjordes med algoritmen Collatz problem, som programmerades i de olika språken och sedan kördes på en Raspberry Pi för att uppmäta hur lång tid varje programspråk tog på sig att lösa problemet. Studien visade att programspråken faktiskt har blivit snabbare med tiden, trots att vissa teorier motsätter sig resultatet.
+Kan programspråk som skapades för 45 år sedan vara snabbare än programspråk som skapas idag? För att undersöka detta genomfördes ett experiment som innefattade sex olika programspråk med ett åldersspann på 37 år mellan det yngsta och det äldsta. Experimentet gick ut på att jämföra tidsåtgången i de olika språken när de löste algoritmen Collatz problem. Algoritmen kördes på en Raspberry Pi som beräknade hur lång tid respektive programspråk tog på sig att lösa problemet. Resultatet visade att programspråk har blivit snabbare med tiden, trots att vissa teorier motsätter sig detta.
 \end{abstract}
 \end{center}
 \clearpage
@@ -72,23 +72,23 @@ Ett programspråk är en formell och strikt uppsättning av instruktioner som en
 Men även då vissa programspråk har haft vissa typer av uppgifter i hänsyn vid sin framtagning, har dessa då samtidigt lyckats bli snabbare? Moores Lag som beskriver att antalet transistorer på chip växer potentiellt, resulterar i datorer och processorer blir snabbare varje år \citep{schaller_1997}. Kan det därför finnas ett mindre behov av att nyare programspråk inte behöver vara lika snabba utan kanske istället till exempel mer lättlästa för människor?
 
 \subsection{Syfte}
-Syftet med studien är att ta fram ett underlag om varför nya programspråk lanseras. Då det kan vara flera egenskaper som påverkar framtagningen och användningen av programspråk har ett fokus koncentrerats på en av dessa - beräkningshastigheten hos ett programspråk.
+Syftet med studien är att ta fram ett underlag om varför nya programspråk skapas. Då det kan vara flera egenskaper som påverkar framtagningen och användningen av programspråk har ett fokus koncentrerats på en av dessa - beräkningshastigheten hos ett programspråk.
 
 \subsection{Frågeställning}
-Frågeställningen för studien är: “Finns det någon korrelation i beräkningshastighet och utgivningsår för kompilerade mellannivåspråk?”
+Frågeställningen för studien är: “Finns det någon korrelation i beräkningshastighet och utgivningsår för mellannivåspråk?”
 
 \subsection{Avgränsning}
-I studien är det endast intressant att jämföra språk med liknande egenskaper. Därför kommer endast kompilerbara mellannivåspråk att testas som går att exekveras (köras) och kompileras på en Raspberry Pi (en liten enkortsdator i storleken av ett kreditkort).
+I studien är det enbart intressant att jämföra språk med liknande egenskaper. Därför kommer kompilerbara mellannivåspråk att testas som går att exekveras (köras) och kompileras på en Raspberry Pi (en liten dator i storlek av ett kreditkort).
 
 
 \section{Begrepp}
-I studien används ett antal termer som är relevanta för experimentet. I detta avsnitt kommer dessa förklaras förenklade för att underlätta vad de innebär.
+I studien används ett antal termer som är relevanta för experimentet. I detta avsnitt kommer de förklaras på ett förenklat sätt som är relevant för studien.
 
 \subsection{Programkod}
 En programkod är en uppsättning instruktioner som utförs av en dators processor. Instruktionerna består av jämförelser eller matematiska operationer av två värden som sedan utför efterföljande instruktioner beroende på resultatet.
 
 \subsection{Processor}
-Processorn brukar hänvisas som “hjärnan” i en dator som utför de flesta av instruktionerna från en programkod \citep{charuba_1996}. Den här studien kommer enbart fokusera på tiden för de beräkningar som processorn utför.
+Processorn brukar hänvisas som “hjärnan” i en dator som utför de flesta av instruktionerna från programkod \citep{charuba_1996}. Den här studien kommer enbart fokusera på tiden för de beräkningar som processorn utför.
 
 \subsection{Kompilering}
 Att kompilera en programkod innebär att programkoden skrivs om från beskrivande syntaxer till maskinkod som processorn kan läsa. I programmeringsspråk brukar en så kallad IF-sats, som kontrollerar villkor, skrivas som följande:
@@ -102,30 +102,30 @@ ENDIF
 Detta är inte programkod som processorn kan tolka utan måste först skrivas om till instruktioner den kan förstå. Denna omskrivning kallas för kompilering. Ett program som kallas för kompilator gör just detta och skriver om den programkoden till det förväntade formatet, så kallad maskinkod \citep{srikant_shankar_2008}.
 
 \subsection{Nivåer på programspråk}
-Inom programmering är det skillnad på hur programspråk fungerar på enheten de körs. I studien kommer endast mellannivåspråk att användas.
+Inom programmering är det skillnad på hur programspråk fungerar när de exekveras. I studien kommer enbart mellannivåspråk att användas.
 \begin{description}
-    \item [Mellannivåspråk:] I ett mellannivåspråk kompileras programkoden innan den exekveras. Det kan liknas med att samtliga läses en gång och utförs sedan direkt efter varandra utan att behöva läsa om dem.
+    \item [Mellannivåspråk:] I ett mellannivåspråk kompileras programkoden innan den exekveras. Det kan liknas med att samtliga instruktioner läses en enda gång och utförs sedan direkt efter varandra.
     \item [Högnivåspråk:] Ett högnivåspråk kompilerar programkoden samtidigt som instruktionerna utförs. Det innebär att varje instruktion läses precis innan den utförs och resulterar därför i att programkoden exekveras långsammare än i ett mellannivåspråk \citep{maclachlan_1992}.
 \end{description}
 
 \subsection{Collatz problem}
-Collatz problem är ett olöst matematiskt problem inom talteorin. Problemet beskriver ett sätt utföra ett antal matematiska instruktioner i följd efter varandra för att till slut nå talet ett. Instruktionerna är följande:
+Collatz problem är ett olöst matematiskt problem inom talteorin. Problemet beskriver ett sätt utföra ett antal matematiska steg i följd för att till slut nå talet ett. Stegen är följande:
 \begin{enumerate}
     \item [1.] Välj ett positivt heltal \( n \) som är större än ett.
     \item [2.] Om \( n \) är jämnt, dividera det med två. Om \( n \) är udda, multiplicera det med tre och addera ett.
     \item [3.] Repetera steg två tills \( n \) når ett.
 \end{enumerate}
-I studien kommer detta problem skrivas om till en algoritm som utför stegen ovan för enskilda tal. Algoritmen används sedan för att utföra instruktioner som då går att mäta mot varandra i olika programspråk. Algoritmen använder endast addition, multiplikation, division och modulo (för att se om ett tal är jämnt eller udda) som matematiska operationer.
+I studien kommer detta problem skrivas om till en algoritm som utför stegen ovan för enskilda tal. Algoritmen används sedan för att utföra instruktioner som går att mäta i tid mellan olika programspråk. Algoritmen använder enbart addition, multiplikation, division som matematiska operationer.
 
-Algoritmen är oförutsägbar för olika tal då det inte finns något mönster för hur många iterationer den kräver innan talet når ett. Detta har dock ingen inverkan i jämförelser mellan olika programspråk så länge samma tal jämförs, eftersom samma tal alltid genererar samma antal steg.
+Algoritmen är oförutsägbar för olika tal då det inte finns något mönster för hur många iterationer som krävs innan talet når ett. Detta har dock ingen inverkan i jämförelser mellan olika programspråk så länge samma tal jämförs, eftersom samma tal alltid genererar samma antal steg.
 
 \subsection{Raspberry Pi}
-Raspberry Pi är en enkortsdator, som refererar till att alla datorns komponenter får plats på ett enda kretskort. Datorn är ungefär lika stor som ett kreditkort och använder sig av operativsystemet Linux som är brett använt inom programmering och utveckling \citep{andrews_2013}. Datorn är lämplig för tester då den har få processer och program som kan påverka tidsmätningar, jämfört med till exempel en vanlig PC.
+Raspberry Pi är en liten dator i storlek av ett kreditkort och använder operativsystemet Linux som är brett använt inom programmering. Datorn är lämplig för tester då den har få processer och program som påverkar tidsmätningar, jämfört med till exempel en PC  \citep{andrews_2013}.
 
 
 \newpage
 \section{Metod}
-Ett initialt urval på programspråk gjordes utifrån de mest populära programspråken idag från \citetitle{tiobe} (\citeyear{tiobe}), som även går att finna som bilaga \ref{appendix:languages}. Detta gjordes för att få ett urval med språk som faktiskt används. Av dessa 25 var det cirka hälften som var mellannivåspråk och ytterligare en halvering skedde efter att ha filtrerat bort de språk som inte var kompatibla på en Raspberry Pi. Språken med sina respektive utgivningsår som återstod blev då följande:
+Ett initialt urval på programspråk gjordes från \citetitle{tiobe} (\citeyear{tiobe}) som listar de 25 mest populära programspråken, vilka går att finna i bilaga \ref{appendix:languages}. Urvalet gjordes för att få ett uppsättning språk som faktiskt används av företag och utvecklare. Av dessa 25 språk var det cirka hälften som var mellannivåspråk och ytterligare en halvering skedde efter att ha filtrerat bort de språk som inte var kompatibla med en Raspberry Pi. Språken med sina respektive utgivningsår som återstod blev då följande:
 
 \begin{itemize}
     \item C (1972)
@@ -137,8 +137,7 @@ Ett initialt urval på programspråk gjordes utifrån de mest populära programs
 \end{itemize}
 För att jämföra olika språk med varandra behövdes en typ av problem lösas. Problemet som användes i studien var Collatz problem som utförde olika matematiska operationer sekventiellt. Totalt användes sex språk, kategoriserade utifrån sitt utgivningsår.
 
-Collatz problem programmerades som en algoritm i de olika språken (se bilaga \ref{appendix:programcodes}).
-Därefter kompilerades och exekverades algoritmen under tidsmätning. Algoritmen körde alla tal mellan 2 till 100 000, och gjorde detta 100 gånger om. Ju längre tid algoritmen tog på sig, desto noggrannare mätvärden gick att jämföra med språken sinsemellan. För att få fram ett konsekvent mätvärde i tid användes en inbyggd timer i en Raspberry Pi, vilket endast hade som syfte att utföra tidsmätningar.
+Problemet programmerades som en algoritm i de olika språken (se bilaga \ref{appendix:programcodes}), kompilerades och exekverades därefter under tidsmätning. Algoritmen körde alla tal mellan 2 till 100 000, och gjorde detta 100 gånger om, då ju längre tid algoritmen tog på sig, desto noggrannare blev jämförelsen mellan språken. För att få fram ett mätvärde i tid användes en inbyggd timer i en Raspberry Pi som angav tiden i millisekunder.
 
 
 \newpage
@@ -147,11 +146,11 @@ Nedan presenteras de resultat som experimentet genererade. Alla tidsmätningar s
 
 % Tabell med rådata
 \begin{table}[H]
-Tabell \ref{table:result} presenterar den rådata som hämtades från de olika körningarna i experimentet. Språkens popularitet är även angivet i tabellen. Populariteten hämtades från \citetitle{tiobe} (\citeyear{tiobe}) där urvalet av programspråken togs från. Den procentuella populariteten mäts i antal sökträffar språket genererar i sökmotorer, delat på totala antalet träffar för alla språk tillsammans.
+Tabell \ref{table:result} presenterar de värden som uppmättes i de olika körningarna i experimentet. Populariteten är hämtad från \citetitle{tiobe} (\citeyear{tiobe}), samma källa som för urvalet av programspråken. Den procentuella populariteten mäts i antal sökträffar språket genererar i sökmotorer delat på totala antalet träffar för alla språk tillsammans.
 
-Direkt till rådatan i tabell \ref{table:result} kan det utläsas att det äldsta språket C i studien var långsammast medan det nyaste språket Go var snabbast. Ändå är C det näst mest populära språket på cirka 7.7\% medan Go har en popularitet på ungefär 2\%.
+Från datan i tabell \ref{table:result} kan det utläsas att det äldsta språket C i studien var långsammast medan det nyaste språket Go var snabbast. Ändå är C det näst mest populära språket på cirka 7.7\% medan Go har en popularitet på ungefär 2\%.
 \begin{center}
-\caption{Mätvärden}
+\caption{Mätvärden och popularitet}
 \label{table:result}
 \begin{tabular}{@{}llll@{}}
 \toprule
@@ -173,7 +172,7 @@ Utgivningsår & Programspråk & Exekveringstid & Popularitet \\ \midrule
 \caption{Exekveringstid över utgivningsår}
 \label{figure:performance}
 \end{center}
-Figur \ref{figure:performance} visar ett diagram med exekveringstiden för de olika programspråken över sitt utgivningsår. Figuren visar även en trendlinje som anger riktning på exekveringstidernas utveckling över utgivningsåren.
+Figur \ref{figure:performance} visar ett diagram med exekveringstiden för de olika programspråken över sitt utgivningsår. Figuren visar även en trendlinje som anger riktning på exekveringstidernas utveckling över utgivningsåren. Ju lägre punkt och siffra desto snabbare är språket.
 \end{figure}
 
 % Diagram med popularitet
@@ -183,22 +182,22 @@ Figur \ref{figure:performance} visar ett diagram med exekveringstiden för de ol
 \caption{Popularitet över utgivningsår}
 \label{figure:popularity}
 \end{center}
-Figur \ref{figure:popularity} presenterar i tidsordning populariteten för de olika programspråken över sitt utgivningsår, på samma horisontella skala som i figur \ref{figure:performance}. Java är mest populär på strax över 16\% med utgivningsår 1995, 14 år äldre och 8 gånger mer populärt i sin användning än programspråket Go. C som är det äldsta språket i studien hade en popularitet på cirka 7.7\% och därmed det näst mest populära språket i studien.
+Figur \ref{figure:popularity} presenterar i tidsordning populariteten för de olika programspråken över sitt utgivningsår, i samma horisontella skala som i figur \ref{figure:performance}. Java är mest populär med strax över 16\% och utgivningsår 1995, 14 år äldre och 8 gånger mer populärt än språket Go. Det äldsta språket C hade en popularitet på cirka 7.7\% och därmed det näst mest populära språket i studien. Ett högt värde i grafen innebär ett mer populärt språk.
 \end{figure}
 
 
 \section{Diskussion}
-Om endast trendlinjen i figur \ref{figure:performance} beaktas kan en logisk följd dras att det är en fallande trend, det vill säga att exekveringstiden i programspråk blir snabbare med tiden. Ändå är det långsammaste språket C det näst mest populära språket på cirka 7.7\%, jämfört med Go som var snabbast men endast hade en popularitet på ungefär 2\%. Detta kan naturligtvis bero på att C har funnits i 37 år längre än Go och därför hunnit användas till fler applikationer samt att det kanske inte lönar sig att lägga ner den tid som krävs för att skriva om program från C till Go.
+Om enbart trendlinjen i figur \ref{figure:performance} beaktas kan en logisk följd dras att det är en fallande trend, det vill säga att exekveringstiden i programspråk blir snabbare med tiden. Ändå är det långsammaste språket C det näst mest populära språket på cirka 7.7\%, jämfört med Go som var snabbast men endast hade en popularitet på ungefär 2\%. Detta kan naturligtvis bero på att C har funnits i 37 år längre än Go och därför hunnit användas till fler applikationer.
 
-I figur \ref{figure:popularity}, där programspråkens popularitet visas, blir sambanden inte lika tydliga. Att Ada och D är såpass långt ner i grafen skulle kunna resoneras från deras långsamma beräkningshastighet, vilket dock motsätts med C++ som är långsammare men över dubbelt så populärt som både D och Ada tillsammans. Det mest populära programspråket är Java på strax över 16\% med utgivningsår 1995, 23 år yngre och mer än dubbelt så populärt än C som är näst mest populärt. En bidragande faktor till Javas popularitet kan troligtvis härledas till att operativsystemet Android och dessa appar bygger på samma språk \citep{gruman_2017}.
+I figur \ref{figure:popularity}, där programspråkens popularitet visas, blir sambanden inte lika tydliga. Att Ada och D är såpass långt ner i grafen skulle kunna resoneras från deras långsamma beräkningshastighet, vilket dock motsätts med C++ som är långsammare men över dubbelt så populärt som både D och Ada tillsammans. Det populäraste programspråket är Java med strax över 16\%, 23 år yngre och mer än två gånger populärare än C som är näst mest populärt. En bidragande faktor till Javas popularitet kan troligtvis härledas till att operativsystemet Android och dessa appar bygger på samma språk \citep{gruman_2017}.
 
-Programspråk som lanseras idag har en större förväntan på sig att kunna utföra fler avancerade operationer utan att behöva skriva lång programkod \citep{stroustrup_1997}. Detta gör att kodbasen (programspråkets byggstenar) för programspråken måste innehålla mer funktioner och operationer som tynger ner programmet, men lyckas ändå verka bli snabbare med tiden \citep{luong_2017}.
+När nyare programspråk lanseras har de en högre förväntan på sig att kunna utföra fler avancerade operationer utan att utvecklaren själv behöver skriva koden \citep{stroustrup_1997}. Detta gör att kodbasen (programspråkets byggstenar) för språken måste innehålla fler funktioner och operationer som tynger ner programmet, men lyckas ändå bli snabbare med tiden - ett resultat som  \citeauthor{luong_2017} (\citeyear{luong_2017}) motsätter sig där han diskuterar varför vissa språk är snabbare än andra. \citeauthor{luong_2017} påstår att äldre språk, såsom C och C++, är snabbare av just den anledningen - att de är nedskalade och utför endast det de programmeras till.
 
-Studien hade kunnat visa ett annat resultat om fler språk kunnat inkluderas. Om dessutom högnivåspråk hade inkluderats skulle dessa kunnat stärka eller motbevisa resultatet. Kompilatorn för programspråk har även en viss inverkan i hur snabbt det kompilerade programmet blir \citep{srikant_shankar_2008}, något som inte tagits hänsyn till i den här studien. Även fler typer av algoritmer skulle kunna testats för att bekräfta respektive programspråks beräkningshastighet.
+Studien hade kunnat visat ett annat resultat om ett större urval av mellannivåspråk använts. Om dessutom separata tester på högnivåspråk hade inkluderats skulle dessa kunnat stärka eller motbevisa resultatet. Kompilatorn för programspråk har även en viss inverkan i hur snabbt det kompilerade programmet blir \citep{srikant_shankar_2008}, något som inte tagits hänsyn till i den här studien. Även fler typer av algoritmer skulle kunna testats för att bekräfta respektive programspråks beräkningshastighet.
 
 
 \section{Slutsats}
-Syftet med studien har varit att testa om beräkningshastigheten i programspråk har ett samband med hur gamla de är med hjälp av olika experiment. Trenden som visar att programspråken blir snabbare i sin beräkningshastighet med tiden skulle kunna ses som självklar då det finns mer vetskap för att utveckla programspråk idag än för 45 år sedan C först kom. Ett exempel på samma utveckling är att bilar blivit snabbare under samma tidsperiod. Programspråken har växt med fler operationer och funktioner, trots det har de inte blivit långsammare; utan tvärtom, blivit snabbare, vilket studien redovisat för.
+Syftet med studien har varit att testa om beräkningshastigheten i programspråk har ett samband med hur gamla de är med hjälp av olika experiment. Trenden som visar att programspråken blir snabbare i sin beräkningshastighet med tiden skulle kunna ses som självklar då det finns mer vetskap för att utveckla programspråk idag än för 45 år sedan då C först kom. Ett exempel på samma utveckling är att bilar blivit snabbare under samma tidsperiod. Programspråken har växt med fler operationer och funktioner, trots det har de inte blivit långsammare; utan tvärtom, blivit snabbare, vilket studien redovisat för.
 
 Frågeställningen har besvarats, även om det finns fler aspekter att tillämpa för att få ett bredare resultat och ett starkare bevis på att trenden stämmer.
 
